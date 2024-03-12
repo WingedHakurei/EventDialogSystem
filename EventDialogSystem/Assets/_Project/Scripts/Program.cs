@@ -1,48 +1,81 @@
 using Cysharp.Threading.Tasks;
+using EventDialogSystem.EventSystem;
 using EventDialogSystem.UI;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.UI;
+using XLua;
 
 namespace EventDialogSystem
 {
+    // TODO: 实现数据中心
     public class Program : MonoBehaviour
     {
         private const string AddressablesHeader = "Assets/_Project";
-        [SerializeField] private Button _testButton;
-        private Transform _canvasTransform;
-        private GameObject _dialogPrefab;
-        private Sprite _image;
-        private Dialog _currentDialog;
+        private EventController _eventController;
+        private LuaEnv _luaEnv;
         private void Start()
         {
-            _canvasTransform = FindObjectOfType<Canvas>().transform;
+            _luaEnv = new LuaEnv();
             LoadResourcesAsync().Forget();
         }
 
+        // TODO: 完成事件系统与数据中心的交互后，启用 Update 方法
+        // private void Update()
+        // {
+        //     _eventController?.Update();
+        // }
+
+        private void OnDestroy()
+        {
+            _eventController?.OnDestroy();
+            _luaEnv = null;
+        }
+
+        // TODO: 整理此方法，使其更加清晰
         private async UniTask LoadResourcesAsync()
         {
             var loadButtonTask = Addressables.LoadAssetAsync<GameObject>($"{AddressablesHeader}/Prefabs/UI/Button.prefab");
             var loadDialogTask = Addressables.LoadAssetAsync<GameObject>($"{AddressablesHeader}/Prefabs/UI/Dialog.prefab");
-            var loadImageTask = Addressables.LoadAssetAsync<Sprite>($"{AddressablesHeader}/Sprites/EventPictures/news_event_001.png");
-            await UniTask.WhenAll(loadButtonTask.ToUniTask(), loadDialogTask.ToUniTask(), loadImageTask.ToUniTask());
+            var picturesLabel = new AssetLabelReference()
+            {
+                labelString = "Picture"
+            };
+            var loadPicturesTask = Addressables.LoadAssetsAsync<Sprite>(picturesLabel, null);
+            var textsLabel = new AssetLabelReference()
+            {
+                labelString = "Text"
+            };
+            var loadTextsTask = Addressables.LoadAssetsAsync<TextAsset>(textsLabel, null);
+            var eventsLabel = new AssetLabelReference()
+            {
+                labelString = "Event"
+            };
+            var loadEventsTask = Addressables.LoadAssetsAsync<TextAsset>(eventsLabel, null);
+            await UniTask.WhenAll(
+                loadButtonTask.ToUniTask(),
+                loadDialogTask.ToUniTask(),
+                loadPicturesTask.ToUniTask(),
+                loadTextsTask.ToUniTask(),
+                loadEventsTask.ToUniTask());
+
+            var canvasTransform = GameObject.Find("Canvas").transform;
             var buttonPrefab = loadButtonTask.Result;
-            _dialogPrefab = loadDialogTask.Result;
-            _image = loadImageTask.Result;
             Dialog.SetButtonPrefab(buttonPrefab);
 
-            _testButton.onClick.AddListener(CreateEvent);
+            var eventResources = new EventResources(_luaEnv);
+            eventResources.SetDialogPrefab(loadDialogTask.Result);
+            eventResources.SetPictures(loadPicturesTask.Result);
+            eventResources.SetTexts(loadTextsTask.Result);
+            var eventViewer = new EventViewer(canvasTransform, eventResources);
+
+            _eventController = new EventController(eventViewer, _luaEnv);
+            _eventController.SetEvents(loadEventsTask.Result);
+
+            // TODO: 完成事件系统与数据中心的交互后，删除下一行代码
+            _eventController.Update();
         }
 
-        // TODO: Event 数据结构与文件
-        private void CreateEvent()
-        {
-            _currentDialog = Instantiate(_dialogPrefab, _canvasTransform).GetComponent<Dialog>();
-            _currentDialog.SetImage(_image);
-            _currentDialog.SetTitle("卢沟桥事变");
-            _currentDialog.SetText("日军最近对北京南面具有战略意义的卢沟桥发动了袭击，不过我们英勇的战士们把他们击退了。毫无疑问，这是一起精心策划的事件，目的是把责任推给我们，迫使我们交出更多的领土——就像当年日本入侵东北制造的九一八事变那样。\n\n我们该如何应对？");
-            _currentDialog.AddButton("我们的忍耐已到极限！", () => { Debug.Log("日本 对 中国 宣战"); });
-            _currentDialog.AddButton("我们承担不起与日本的全面战争。", () => { Debug.Log("日本 触发国家事件 卢沟桥事变"); });
-        }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace EventDialogSystem.UI
     {
         [SerializeField] private Image _image;
         [SerializeField] private TMP_Text _title;
-        [SerializeField] private TMP_Text _text;
+        [SerializeField] private TMP_Text _desc;
         [SerializeField] private Transform _buttonRoot;
         private static GameObject _buttonPrefab;
         private readonly List<MyButton> _buttons = new List<MyButton>();
@@ -27,17 +27,17 @@ namespace EventDialogSystem.UI
             _rectTransform.anchoredPosition += eventData.delta;
         }
 
-        public void SetImage(Sprite sprite)
+        public void SetPicture(Sprite picture)
         {
-            _image.sprite = sprite;
+            _image.sprite = picture;
         }
         public void SetTitle(string title)
         {
             _title.text = title;
         }
-        public void SetText(string text)
+        public void SetDesc(string desc)
         {
-            _text.text = text;
+            _desc.text = desc;
         }
         public static void SetButtonPrefab(GameObject buttonPrefab)
         {

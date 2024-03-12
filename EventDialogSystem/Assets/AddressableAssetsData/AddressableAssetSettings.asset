@@ -80,7 +80,9 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - UI
-    - EventPictures
+    - Picture
+    - Event
+    - Text
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 2b1991bd9862849419cf23173ca55a9f, type: 2}

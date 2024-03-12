@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2124415456236476831}
   - component: {fileID: 2124415456236476828}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 2124415456796705581}
   _title: {fileID: 2124415456529567462}
-  _text: {fileID: 2124415456236476828}
+  _desc: {fileID: 2124415456236476828}
   _buttonRoot: {fileID: 2124415457762092517}
 --- !u!1 &2124415457488151782
 GameObject:

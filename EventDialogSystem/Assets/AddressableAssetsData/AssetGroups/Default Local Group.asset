@@ -38,15 +38,25 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
   - m_GUID: e4bb8ee5f8d3ad14091137ebcefa9ac7
-    m_Address: Assets/_Project/Sprites/EventPictures/news_event_001.png
+    m_Address: Assets/_Project/Sprites/Pictures/news_event_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
-    - EventPictures
+    - Picture
   - m_GUID: 74637bdae174b43479fc290e5ff5d1f6
-    m_Address: Assets/_Project/Sprites/EventPictures/news_event_002.png
+    m_Address: Assets/_Project/Sprites/Pictures/news_event_002.png
     m_ReadOnly: 0
     m_SerializedLabels:
-    - EventPictures
+    - Picture
+  - m_GUID: 2756355e4cf1e7141b7eccd59c397b63
+    m_Address: Assets/_Project/LuaScripts/events/WTT_China.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Event
+  - m_GUID: 87ce1c39486ddd24ea5cdb6b90377f6a
+    m_Address: Assets/_Project/LuaScripts/texts/WTT_China.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Text
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 540f9f1a01aeae64aa1451e03f0e3678, type: 2}
   m_SchemaSet:
