@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace EventDialogSystem.UI
 {
-    public class Dialog : MonoBehaviour, IDragHandler
+    public class Dialog : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         [SerializeField] private Image _image;
         [SerializeField] private TMP_Text _title;
@@ -25,6 +25,15 @@ namespace EventDialogSystem.UI
         public void OnDrag(PointerEventData eventData)
         {
             _rectTransform.anchoredPosition += eventData.delta;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.dragging)
+            {
+                return;
+            }
+            transform.SetAsLastSibling();
         }
 
         public void SetPicture(Sprite picture)

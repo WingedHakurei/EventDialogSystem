@@ -24,6 +24,23 @@ local events = {
                 end
             }
         }
+    },
+    {
+        id = "wtt.2",
+        title = "wtt.2.t",
+        desc = "wtt.2.d",
+        picture = "news_event_074",
+        -- TODO: 添加数据中心作为参数，用于判断是否满足触发条件
+        trigger = function()
+            return true
+        end,
+
+        -- TODO: 添加数据中心作为参数，用于修改游戏状态
+        options = {
+            {
+                name = "wtt.2.a"
+            }
+        }
     }
 }
 

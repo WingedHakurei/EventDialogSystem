@@ -42,8 +42,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Picture
-  - m_GUID: 74637bdae174b43479fc290e5ff5d1f6
-    m_Address: Assets/_Project/Sprites/Pictures/news_event_002.png
+  - m_GUID: 7c8f785bdb62fa749bed12063dfdbe93
+    m_Address: Assets/_Project/Sprites/Pictures/news_event_074.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - Picture

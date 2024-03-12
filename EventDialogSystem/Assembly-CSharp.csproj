@@ -59,16 +59,16 @@
     <UnityVersion>2020.3.48f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\狮子头零冲\.vscode\extensions\visualstudiotoolsforunity.vstuc-0.9.4\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\狮子头零冲\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Project\Scripts\UI\Dialog.cs" />
     <Compile Include="Assets\_Project\Scripts\EventSystem\Event.cs" />
+    <Compile Include="Assets\_Project\Scripts\EventSystem\EventResources.cs" />
     <Compile Include="Assets\_Project\Scripts\UI\MyButton.cs" />
     <Compile Include="Assets\_Project\Scripts\Program.cs" />
-    <Compile Include="Assets\_Project\Scripts\EventSystem\EventController.cs" />
     <Compile Include="Assets\_Project\Scripts\EventSystem\EventViewer.cs" />
-    <Compile Include="Assets\_Project\Scripts\EventSystem\EventResources.cs" />
+    <Compile Include="Assets\_Project\Scripts\EventSystem\EventController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Project\Fonts\zh-cn_Commonly_used.txt" />
