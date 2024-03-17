@@ -23,7 +23,7 @@ namespace EventDialogSystem.EventSystem
             {
                 dialog.AddButton(
                     _eventResources.Texts.ContainsKey(option.Name) ? _eventResources.Texts[option.Name] : option.Name,
-                    option.Immediate);
+                    option.Effect);
             }
         }
         public void OnDestroy()

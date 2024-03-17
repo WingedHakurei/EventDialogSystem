@@ -3,6 +3,6 @@ An exploration for a dialog system with scripted events. Inspired by Paradox Int
 
 ## References
 - UniTask: https://github.com/Cysharp/UniTask
-- XLua: https://github.com/Tencent/xLua
+- xLua: https://github.com/Tencent/xLua
 - SourceHanSans Font: https://github.com/adobe-fonts/source-han-sans
 - Images from Hearts of Iron IV: https://store.steampowered.com/app/394360/Hearts_of_Iron_IV/

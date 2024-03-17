@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="Assets\Plugins\XLua\Examples\08_Hotfix\Editor\HotfixTestCfg.cs" />
     <Compile Include="Assets\Plugins\XLua\Examples\13_BuildFromCLI\Editor\BuildFromCLI.cs" />
-    <Compile Include="Assets\Plugins\XLua\Editor\ExampleConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

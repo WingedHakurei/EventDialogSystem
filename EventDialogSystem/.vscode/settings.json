@@ -49,7 +49,11 @@
         "Obj/": true,
         "ProjectSettings/": true,
         "temp/": true,
-        "Temp/": true
+        "Temp/": true,
+        "**/StreamingAssets/": true
     },
-    "dotnet.defaultSolution": "EventDialogSystem.sln"
+    "dotnet.defaultSolution": "EventDialogSystem.sln",
+    "cSpell.words": [
+        "mtth"
+    ]
 }

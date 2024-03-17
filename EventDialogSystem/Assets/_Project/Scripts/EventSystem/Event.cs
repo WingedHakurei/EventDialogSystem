@@ -10,7 +10,10 @@ namespace EventDialogSystem.EventSystem
         public string Title { get; private set; }
         public string Desc { get; private set; }
         public string Picture { get; private set; }
-        public Func<bool> Trigger { get; private set; }
+        public bool? FireOnlyOnce { get; private set; }
+        public bool? IsTriggeredOnly { get; private set; }
+        public Action<DataCenter> Immediate { get; private set; }
+        public Func<DataCenter, bool> Trigger { get; private set; }
         public List<Option> Options { get; private set; }
         public Event(LuaTable luaTable)
         {
@@ -18,7 +21,10 @@ namespace EventDialogSystem.EventSystem
             Title = luaTable.Get<string>("title");
             Desc = luaTable.Get<string>("desc");
             Picture = luaTable.Get<string>("picture");
-            Trigger = luaTable.Get<Func<bool>>("trigger");
+            Trigger = luaTable.Get<Func<DataCenter, bool>>("trigger");
+            FireOnlyOnce = luaTable.TryGetValueType<bool>("fire_only_once");
+            IsTriggeredOnly = luaTable.TryGetValueType<bool>("is_triggered_only");
+            Immediate = luaTable.Get<Action<DataCenter>>("immediate");
             Options = new List<Option>();
             var optionsTable = luaTable.Get<LuaTable>("options");
             foreach (var key in optionsTable.GetKeys<int>())
@@ -27,16 +33,33 @@ namespace EventDialogSystem.EventSystem
                 var option = new Option(optionTable);
                 Options.Add(option);
             }
-
         }
+
+        public void OnDestroy()
+        {
+            foreach (var option in Options)
+            {
+                option.OnDestroy();
+            }
+            Options.Clear();
+            Options = null;
+            Immediate = null;
+            Trigger = null;
+        }
+
         public class Option
         {
             public string Name { get; private set; }
-            public Action Immediate { get; private set; }
+            public Action<DataCenter> Effect { get; private set; }
             public Option(LuaTable luaTable)
             {
                 Name = luaTable.Get<string>("name");
-                Immediate = luaTable.Get<Action>("immediate");
+                Effect = luaTable.Get<Action<DataCenter>>("effect");
+            }
+
+            public void OnDestroy()
+            {
+                Effect = null;
             }
         }
     }

@@ -69,6 +69,8 @@
     <Compile Include="Assets\_Project\Scripts\Program.cs" />
     <Compile Include="Assets\_Project\Scripts\EventSystem\EventViewer.cs" />
     <Compile Include="Assets\_Project\Scripts\EventSystem\EventController.cs" />
+    <Compile Include="Assets\_Project\Scripts\Extensions\LuaTableExtension.cs" />
+    <Compile Include="Assets\_Project\Scripts\EventSystem\DataCenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Project\Fonts\zh-cn_Commonly_used.txt" />

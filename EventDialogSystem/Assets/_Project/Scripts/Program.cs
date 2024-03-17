@@ -1,3 +1,8 @@
+// TODO: 引入 MTTH，每隔多长时间尝试触发一次事件，可视为检查间隔。这需要实现时间系统
+// TODO: 引入 after，用于在事件触发后的一段时间后执行效果
+// TODO: 添加 on_actions，用于在游戏中的特定时间点（如启动时、C#层内置事件触发时）触发事件
+// TODO: 引入 scope
+
 using Cysharp.Threading.Tasks;
 using EventDialogSystem.EventSystem;
 using EventDialogSystem.UI;
@@ -7,32 +12,49 @@ using XLua;
 
 namespace EventDialogSystem
 {
-    // TODO: 实现数据中心
     public class Program : MonoBehaviour
     {
         private const string AddressablesHeader = "Assets/_Project";
+        private DataCenter _dataCenter;
         private EventController _eventController;
         private LuaEnv _luaEnv;
         private void Start()
         {
             _luaEnv = new LuaEnv();
-            LoadResourcesAsync().Forget();
+            StartAsync().Forget();
         }
 
-        // TODO: 完成事件系统与数据中心的交互后，启用 Update 方法
-        // private void Update()
-        // {
-        //     _eventController?.Update();
-        // }
+        private void Update()
+        {
+            _eventController?.Update();
+        }
 
         private void OnDestroy()
         {
             _eventController?.OnDestroy();
+            _luaEnv?.Dispose();
             _luaEnv = null;
         }
 
-        // TODO: 整理此方法，使其更加清晰
-        private async UniTask LoadResourcesAsync()
+        // 仅用于测试
+        public void ModifyDataCenterTest()
+        {
+            _dataCenter.TestData = !_dataCenter.TestData;
+        }
+
+        private async UniTask StartAsync()
+        {
+            var eventResources = await LoadResourcesAsync();
+            var canvasTransform = GameObject.Find("Canvas").transform;
+            var eventViewer = new EventViewer(canvasTransform, eventResources);
+            _dataCenter = new DataCenter();
+            _eventController = new EventController(eventViewer, _dataCenter, _luaEnv);
+            _eventController.LoadEvents(eventResources.Events);
+            _dataCenter.InvokeEvent = _eventController.InvokeEvent;
+            Dialog.SetDataCenter(_dataCenter);
+        }
+
+        private async UniTask<EventResources> LoadResourcesAsync()
         {
             var loadButtonTask = Addressables.LoadAssetAsync<GameObject>($"{AddressablesHeader}/Prefabs/UI/Button.prefab");
             var loadDialogTask = Addressables.LoadAssetAsync<GameObject>($"{AddressablesHeader}/Prefabs/UI/Dialog.prefab");
@@ -58,7 +80,6 @@ namespace EventDialogSystem
                 loadTextsTask.ToUniTask(),
                 loadEventsTask.ToUniTask());
 
-            var canvasTransform = GameObject.Find("Canvas").transform;
             var buttonPrefab = loadButtonTask.Result;
             Dialog.SetButtonPrefab(buttonPrefab);
 
@@ -66,13 +87,9 @@ namespace EventDialogSystem
             eventResources.SetDialogPrefab(loadDialogTask.Result);
             eventResources.SetPictures(loadPicturesTask.Result);
             eventResources.SetTexts(loadTextsTask.Result);
-            var eventViewer = new EventViewer(canvasTransform, eventResources);
+            eventResources.SetEvents(loadEventsTask.Result);
 
-            _eventController = new EventController(eventViewer, _luaEnv);
-            _eventController.SetEvents(loadEventsTask.Result);
-
-            // TODO: 完成事件系统与数据中心的交互后，删除下一行代码
-            _eventController.Update();
+            return eventResources;
         }
 
 

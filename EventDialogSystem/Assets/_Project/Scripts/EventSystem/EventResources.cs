@@ -9,6 +9,7 @@ namespace EventDialogSystem.EventSystem
         public GameObject DialogPrefab { get; private set; }
         public Dictionary<string, string> Texts { get; } = new Dictionary<string, string>();
         public Dictionary<string, Sprite> Pictures { get; } = new Dictionary<string, Sprite>();
+        public IList<string> Events { get; } = new List<string>();
         private LuaEnv _luaEnv;
         public EventResources(LuaEnv luaEnv)
         {
@@ -42,6 +43,13 @@ namespace EventDialogSystem.EventSystem
                     table.Get(key, out string value);
                     Texts.Add(key, value);
                 }
+            }
+        }
+        public void SetEvents(IList<TextAsset> events)
+        {
+            foreach (var eventText in events)
+            {
+                Events.Add(eventText.text);
             }
         }
     }

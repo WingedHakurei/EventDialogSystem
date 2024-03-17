@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using EventDialogSystem.EventSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,9 +14,19 @@ namespace EventDialogSystem.UI
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _desc;
         [SerializeField] private Transform _buttonRoot;
-        private static GameObject _buttonPrefab;
         private readonly List<MyButton> _buttons = new List<MyButton>();
         private RectTransform _rectTransform;
+
+        private static GameObject _buttonPrefab;
+        private static DataCenter _dataCenter;
+        public static void SetButtonPrefab(GameObject buttonPrefab)
+        {
+            _buttonPrefab = buttonPrefab;
+        }
+        public static void SetDataCenter(DataCenter dataCenter)
+        {
+            _dataCenter = dataCenter;
+        }
 
         private void Start()
         {
@@ -48,17 +59,13 @@ namespace EventDialogSystem.UI
         {
             _desc.text = desc;
         }
-        public static void SetButtonPrefab(GameObject buttonPrefab)
-        {
-            _buttonPrefab = buttonPrefab;
-        }
-        public void AddButton(string text, Action action)
+        public void AddButton(string text, Action<DataCenter> action)
         {
             var button = Instantiate(_buttonPrefab, _buttonRoot).GetComponent<MyButton>();
             button.SetText(text);
             button.OnClick.AddListener(() =>
             {
-                action?.Invoke();
+                action?.Invoke(_dataCenter);
                 Destroy(gameObject);
             });
 
