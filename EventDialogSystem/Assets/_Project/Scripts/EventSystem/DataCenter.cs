@@ -5,6 +5,8 @@ namespace EventDialogSystem.EventSystem
     public class DataCenter
     {
         public Action<string> InvokeEvent;
-        public bool TestData { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
     }
 }

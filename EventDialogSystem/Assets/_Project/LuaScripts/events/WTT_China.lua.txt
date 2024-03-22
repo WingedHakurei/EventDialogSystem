@@ -10,7 +10,7 @@ local events = {
 
         -- 事件触发条件。触发事件：检查trigger是否为true，是则执行immediate并显示事件
         trigger = function(data_center)
-            return data_center.TestData == true
+            return data_center.Year == 1937 and data_center.Month == 7 and data_center.Day == 7
         end,
 
         -- 事件立即触发效果

@@ -109,8 +109,8 @@
     <Compile Include="Assets\Plugins\UniTask\Runtime\UnityAsyncExtensions.AssetBundleRequestAllAssets.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Internal\PlayerLoopRunner.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\UniTask.WaitUntil.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\UniTask.Run.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\UniTask.AsValueTask.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\UniTask.Run.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Internal\ArrayUtil.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\MoveNextSource.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Triggers\MonoBehaviourMessagesTriggers.cs" />

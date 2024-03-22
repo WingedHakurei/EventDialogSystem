@@ -33,6 +33,7 @@
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="EventDialogSystem.UI.Dialog" preserve="all" />
     <type fullname="EventDialogSystem.UI.MyButton" preserve="all" />
+    <type fullname="EventDialogSystem.UI.GameTimeUI" preserve="all" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="TMPro.TMP_FontAsset" preserve="all" />

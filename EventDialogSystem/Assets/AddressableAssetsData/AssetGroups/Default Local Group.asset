@@ -57,6 +57,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Text
+  - m_GUID: 91ab8d2d66e24a444899e557f27fd36d
+    m_Address: Assets/_Project/Prefabs/UI/GameTime.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 540f9f1a01aeae64aa1451e03f0e3678, type: 2}
   m_SchemaSet:
